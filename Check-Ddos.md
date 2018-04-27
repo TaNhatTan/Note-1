@@ -65,3 +65,15 @@ allow ip
 bo allow 
 
         csf -ar <IP>
+
+
+3.IP set gen4
+
+         ipset list -n
+         
+         ipset add NAME 1.2.3.4
+         
+         ipset del NAME 1.2.3.4
+
+
+https://github.com/firehol/firehol/wiki/Working-with-IPSETs
