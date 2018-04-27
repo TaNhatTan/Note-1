@@ -1,50 +1,50 @@
 Config Mail Relay via exim
 
 
-1. Copy default config
+  1. Copy default config
 
-cp /etc/exim.conf /etc/exim.conf.org
+    cp /etc/exim.conf /etc/exim.conf.org
 
-vi /etc/exim.conf
+    vi /etc/exim.conf
 
-2. Tìm section begin routers, thêm hoặc thay thế lookuphost
+  2. Tìm section begin routers, thêm hoặc thay thế lookuphost
 
-lookuphost:
+    lookuphost:
 
-  driver = manualroute
+    driver = manualroute
   
-  domains = ! +local_domains
+    domains = ! +local_domains
   
-  ignore_target_hosts = 127.0.0.0/8
+    ignore_target_hosts = 127.0.0.0/8
   
-  transport = auth_relay
+    transport = auth_relay
   
-  route_list = * <relay-domain>
+    route_list = * <relay-domain>
   
-  no_more
+    no_more
   
-3. Cấu hình cho transport, bằng section begin transports, thêm vào
-auth_relay:
+  3. Cấu hình cho transport, bằng section begin transports, thêm vào
+    auth_relay:
 
-  driver = smtp
+    driver = smtp
   
-  port = 25
+    port = 25
   
-  hosts_require_auth = $host_address
+    hosts_require_auth = $host_address
   
-  hosts_require_tls = $host_address
+    hosts_require_tls = $host_address
   
-Note: Port 25, 587, 465 tuỳ vào cấu hình mail cần sử dụng.
+  Note: Port 25, 587, 465 tuỳ vào cấu hình mail cần sử dụng.
 
-4. Cấu hình begin authenticators bằng cách thêm dòng
+  4. Cấu hình begin authenticators bằng cách thêm dòng
 
-auth_login:
+  auth_login:
   
-  driver = plaintext
+    driver = plaintext
   
-  public_name = LOGIN
+    public_name = LOGIN
   
-  hide client_send = : <username> : <password>
+    hide client_send = : <username> : <password>
 
 
-Nguồn  https://github.com/TraiOi/d7b3560525906f386528ca7d588ee5e9/blob/master/MyNote/Mail-Relay-Config.md
+  Nguồn  https://github.com/TraiOi/d7b3560525906f386528ca7d588ee5e9/blob/master/MyNote/Mail-Relay-Config.md
