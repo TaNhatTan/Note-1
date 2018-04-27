@@ -2,10 +2,9 @@
 
 > **Description**: Note for me
 >
-> **Author**: TraiOi
+> **Author**: tanhattan0051
 >
-> **Last time**: 20/04/2018
-
+> **Last time**: 27/04/2018
 ## Content
 
 * **[Check DDoS](./Check-Ddos.md)**
