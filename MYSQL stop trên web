@@ -48,3 +48,7 @@ proc                    /proc                   proc    defaults        0 0
 check lại
 mount -a 
 free -m 
+
+
+
+https://www.centos.org/docs/5/html/5.2/Deployment_Guide/s2-swap-creating-file.html
