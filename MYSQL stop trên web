@@ -1,0 +1,50 @@
+    MYSQL stop trên web
+    
+    
+ tail /var/log/messages
+
+ tail /var/log/mysqld.log 
+
+
+thMay  7 07:00:33 web2 kernel: [<ffffffff81127dc0>] ? out_of_memory+0x220/0x3c0
+
+May  7 07:00:33 web2 kernel: [15727]    48 15727   140848      369   0       0             0 httpd
+May  7 07:00:33 web2 kernel: Out of memory: Kill process 1022 (mysqld) score 72 or sacrifice child
+
+
+180507  7:00:34 InnoDB: Initializing buffer pool, size = 128.0M
+InnoDB: mmap(137363456 bytes) failed; errno 12
+ 
+    cách khắc phục 
+    
+1/ tăng swap lên 4G
+
+2/ vim /etc/mysql.cnf
+[mysqld]
+innodb_buffer_pool_size=2M
+
+1/ tăng swap lên 4GB 
+dd if=/dev/zero of=/swapfile bs=1024 count=4194304
+mkswap /swapfile
+swapon /swapfile
+vim /etc/fstab
+
+/swapfile swap swap defaults 0 0
+
+
+thành 
+
+dev/mapper/vg_cent6min-lv_root /                       ext4    defaults        1 1
+UUID=b0f21d58-78a7-409d-965e-199554a316d9 /boot                   ext4    defaults        1 2
+#/dev/mapper/vg_cent6min-lv_swap swap                    swap    defaults        0 0
+/swapfile swap swap defaults 0 0
+tmpfs                   /dev/shm                tmpfs   defaults        0 0
+devpts                  /dev/pts                devpts  gid=5,mode=620  0 0
+sysfs                   /sys                    sysfs   defaults        0 0
+proc                    /proc                   proc    defaults        0 0
+
+
+
+check lại
+mount -a 
+free -m 
