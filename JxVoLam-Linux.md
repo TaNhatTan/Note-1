@@ -19,6 +19,30 @@ yum install mysql-server
 
 <a name="II"></a>
 #### II. KHÁCH HÀNG THAO TÁC:  
+/sbin/ip addr add ipproxy/32 dev eth1:1
+
+vim /etc/rc.local 
+
+add thêm dòng vào 
+
+/sbin/ip addr add ipproxy/32 dev eth1:1
+
+check xem có nat chưa 
+
+ iptables -nvL
+
+NAt IP 
+
+ iptables -t nat -I PREROUTING -d 10.20.10.x/32 -m tcp -p tcp --dport 6666 -j DNAT --to-destination ipproxy
+ 
+ /etc/init.d/iptables save
+
+check game có chạy port 6666 and 5622 
+
+netstat -ntpl
+
+telnet ipproxy 5622 và 6666 có kí tự đặt biệt là ok
+
 - Phân quyền cho các file sau có quyền execute:
 ```
 chmod +x gateway/goddess_y gateway/bishop_y gateway/s3relay/s3relay_y server1/jx_linux_y
